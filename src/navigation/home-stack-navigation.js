@@ -1,7 +1,5 @@
 import React from "react";
 import { HomeScreen, DetailsScreen } from "../screens";
-
-
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 

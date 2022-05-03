@@ -1,15 +1,19 @@
 import React from 'react';
-
-
-import { Text } from 'react-native';
-
+import { Text, Button } from 'react-native';
 import styled from 'styled-components/native';
 
 
-const HomeScreen = () => {
+
+const HomeScreen = ({ navigation }) => {
     return (
         <Container>
-            <Text>HomeScreen</Text>
+            <Text>Home</Text>
+
+            <Button
+                title="Go to Details"
+                onPress={() => { navigation.navigate('details') }}
+            />
+
         </Container>
     )
 }
@@ -17,7 +21,6 @@ const HomeScreen = () => {
 
 const Container = styled.View`
     flex: 1;
-    background-color: red;
     align-items: center;
     justify-content: center;
 `;
