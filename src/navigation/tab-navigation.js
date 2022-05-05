@@ -1,5 +1,11 @@
 import React from "react";
-import { homeNavigationOptions, SearchScreen, FavoriteScreen } from "../screens";
+import {
+    homeNavigationOptions,
+    SearchScreen,
+    searchNavigationOptions,
+    FavoriteScreen,
+    favoriteNavigationOptions
+} from "../screens";
 
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -15,6 +21,19 @@ import HomeStack from "./home-stack-navigation";
 
 import { Text, TouchableOpacity, Button } from 'react-native';
 
+import { COLORS } from "../constants/theme";
+
+
+
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
+// export const favoriteNavigationOptions = {
+//     tabBarIcon: ({ color, size }) => (
+//         <Icon name="menu" size={30} color={color} />
+//     ),
+//     tabBarActiveTintColor: "#fff",
+// };
+
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +43,14 @@ const Tab = createBottomTabNavigator();
 export default function TabNavigation() {
     return (
         <Tab.Navigator
-            screenOptions={{ headerShown: false }}
+            screenOptions={{
+                headerShown: false,
+                tabBarShowLabel: false,
+                tabBarStyle: {
+                    backgroundColor: COLORS.secondary,
+                }
+            }
+            }
         >
 
             <Tab.Screen
@@ -37,11 +63,13 @@ export default function TabNavigation() {
             <Tab.Screen
                 name="search"
                 component={SearchScreen}
+                options={searchNavigationOptions}
 
             />
             <Tab.Screen
                 name="favorie"
                 component={FavoriteScreen}
+                options={favoriteNavigationOptions}
             />
 
 
@@ -49,9 +77,15 @@ export default function TabNavigation() {
                 name="drawer"
                 component={DrawerToggler}
                 options={({ navigation }) => ({
-                    tabBarButton: props => <TouchableOpacity {...props}>
-                        < DrawerButton nav={navigation} />
-                    </TouchableOpacity>,
+                    tabBarIcon: ({ color, size }) => (
+                        <Icon
+                            name="menu"
+                            size={30}
+                            color={color}
+                            onPress={() => navigation.openDrawer()}
+                        />
+                    ),
+                    tabBarActiveTintColor: "#fff",
                 })}
                 listeners={{
                     tabPress: (e) => {
@@ -59,20 +93,15 @@ export default function TabNavigation() {
                     }
                 }}
             />
-
-
-        </Tab.Navigator>
+        </ Tab.Navigator>
     );
 }
 
 const DrawerToggler = () => null;
 
-const DrawerButton = ({ nav }) => {
-    console.log(nav);
-    return (
-        <Button
-            title="drawer"
-            onPress={() => nav.openDrawer()}
-        />
-    )
-};
+// const DrawerButton = ({ nav }) => {
+//     console.log(nav);
+//     return (
+//         <Icon name="menu" size={30} onPress={() => nav.openDrawer()} />
+//     )
+// };
