@@ -1,28 +1,62 @@
 import React from 'react';
-import { Text, Button } from 'react-native';
-import styled from 'styled-components/native';
+import {View, Text} from 'react-native';
 
+import {
+  Container,
+  RowContainer,
+  TitleWrapper,
+  SubTitle,
+  Title,
+  Link,
+  PointBadge,
+  BadgeText,
+  OptionsContainer,
+  OptionsTextContainer,
+  OptionsText,
+  VerticalDevider,
+} from './home-screen.styles';
 
+const HomeScreen = ({navigation}) => {
+  return (
+    <Container>
+      <RowContainer>
+        <TitleWrapper>
+          <SubTitle>Good morning</SubTitle>
+          <Title>Batricia saliora</Title>
+        </TitleWrapper>
 
-const HomeScreen = ({ navigation }) => {
-    return (
-        <Container>
-            <Text>Home</Text>
+        <PointBadge>
+          <BadgeText>240 point</BadgeText>
+        </PointBadge>
+      </RowContainer>
 
-            <Button
-                title="Go to Details"
-                onPress={() => { navigation.navigate('details') }}
-            />
+      <OptionsContainer>
+        <Option icon="📖" text="Claim" />
+        <VerticalDevider />
+        <Option icon="➕" text="Get point" />
+        <VerticalDevider />
+        <Option icon="🧡" text="My Card" />
+      </OptionsContainer>
 
-        </Container>
-    )
-}
+      <RowContainer>
+        <SubTitle>My Book</SubTitle>
+        <Link>See more</Link>
+      </RowContainer>
+    </Container>
+  );
+};
 
+export default HomeScreen;
 
-const Container = styled.View`
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-`;
-
-export default HomeScreen
+const Option = ({icon, text}) => {
+  return (
+    <OptionsTextContainer onPress={() => console.log('clicked')}>
+      <OptionsText>
+        <Text style={{color: 'white'}}>{icon}</Text>
+      </OptionsText>
+      <OptionsText>
+        <Text style={{color: 'white'}}>{text}</Text>
+      </OptionsText>
+    </OptionsTextContainer>
+  );
+};
